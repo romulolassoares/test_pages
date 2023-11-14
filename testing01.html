@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang=pt-br><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width, initial-scale=1.0"><style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+		
+        .container {
+            margin-top: 20px; /* Ajuste conforme necessário */
+            overflow-x: auto;
+            width: 100%; /* Largura total da viewport */
+        }
+
+        .presentation-text {
+            max-width: 80%; /* Largura máxima igual à largura da tabela */
+            margin: 0 auto; /* Centralizar o texto horizontalmente */
+            text-align: center; /* Centralizar o texto horizontalmente */
+        }
+
+        .table {
+            width: 100%; /* Largura total da viewport */
+            border-collapse: collapse;
+            margin: 0 auto; /* Centralizar a tabela */
+            margin-bottom: 20px; /* Adicione a margem desejada abaixo da tabela */
+        }
+		
+        .table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .table td, .table th {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .row {
+            cursor: pointer;
+            background: linear-gradient(to right, #f0f0f0, #4CAF50);
+            transition: background 0.3s;
+        }
+
+		.checked-row, .Checked-row {
+			background: linear-gradient(to right, #f0f0f0, #4CAF50);
+			transition: background 0.3s;
+		}
+
+		.warning-row, .Warning-row {
+			background: linear-gradient(to right, #f0f0f0, #FFC107);
+			transition: background 0.3s;
+		}
+
+		.error-row, .Error-row {
+			background: linear-gradient(to right, #f0f0f0, #C90E1E);
+			transition: background 0.3s;
+		}
+                               
+  		.missing-row, .Missing-row {
+  			background: linear-gradient(to right, #f0f0f0, #C93D0E);
+  			transition: background 0.3s;
+  		}
+                                 
+		.checked-row:hover, .Checked-row:hover {
+			background: linear-gradient(to right, #d6d4d4, #409443);
+			border: 1px solid #409443; /* Troque "blue" pela cor desejada */
+		}
+
+		.warning-row:hover, .Warning-row:hover {
+			background: linear-gradient(to right, #d6d4d4, #d19e04);
+			border: 1px solid #d19e04; /* Troque "blue" pela cor desejada */
+		}
+
+		.error-row:hover, .Error-row:hover {
+			background: linear-gradient(to right, #d6d4d4, #8a0813);
+			border: 1px solid #8a0813; /* Troque "blue" pela cor desejada */
+		}
+                               
+  		.missing-row:hover, .Missing-row:hover {
+			background: linear-gradient(to right, #d6d4d4, #9c2f0b);
+			border: 1px solid #9c2f0b; /* Troque "blue" pela cor desejada */
+  		}                                 
+
+        .row:hover {
+            background: linear-gradient(to right, #f0f0f0, #4CAF50);
+        }
+
+        .Checked {
+            color: #000; /* Alteração da cor para preto */
+        }
+
+        .Warning {
+            color: #000; /* Alteração da cor para preto */
+        }
+
+        .Error {
+            color: #000; /* Alteração da cor para preto */
+        }
+
+        .expanded {
+            display: table-row-group;
+        }
+
+        .description {
+            display: none;
+            background-color: #fff;
+            padding: 10px;
+        }
+		
+        .credits-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }        
+
+    </style><script>
+        function toggleDescription(topicId, rowId) {
+            const description = document.getElementById(`description-${topicId}-${rowId}`);
+            
+            // Percorre todas as linhas e fecha aquelas que estão abertas
+            const allDescriptions = document.querySelectorAll('.description');
+            allDescriptions.forEach((desc) => {
+                if (desc.id !== `description-${topicId}-${rowId}`) {
+                    desc.style.display = 'none';
+                }
+            });
+
+            // Abre ou fecha a linha clicada
+            description.style.display = (description.style.display === 'none' || description.style.display === '') ? 'table-row' : 'none';
+        }
+		
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+		
+    </script></head><body><button class=credits-button onclick=openModal()>Créditos</button><div id=modal class=modal onclick=closeModal()><div class=modal-content onclick=event.stopPropagation()><span class=close onclick=closeModal()>&times;</span><div class=section><h2>Design</h2><p>Rogério</p><p>Mara</p></div><div class=section><h2>Desenvolvedor(es) das Críticas</h2><p>Bruno</p><p>Gabriela</p><p>João Pedro</p><p>Paula</p><p>Rebecca</p><p>Rogério</p><p>Rômulo</p><p>Victor</p></div></div></div><div class=container><p class=presentation-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><table class=table><tr><th>1 - Identificação de sujeitos e certificação de previstos</th><th>Status</th></tr><tr class=Checked-row onclick=toggleDescription(1,1)><td>1 - cd_aluno correto</td><td class=Checked>Checked</td></tr><tr id=description-1-1 class=description data-topic=1><td colspan=2>Verifica se a montagem do cd_aluno foi correta</td></tr><tr class=Checked-row onclick=toggleDescription(2,2)><td>2 - Entidade apontando para mais de um código</td><td class=Checked>Checked</td></tr><tr id=description-2-2 class=description data-topic=2><td colspan=2>Verifica se uma entidade administrativa está apontando para mais de um cd_aluno</td></tr><tr class=Checked-row onclick=toggleDescription(3,3)><td>3 - cd_aluno apontando para mais de uma mãe</td><td class=Checked>Checked</td></tr><tr id=description-3-3 class=description data-topic=3><td colspan=2>Verifica se alguma cd_aluno está com mais de um nome de mãe</td></tr><tr class=Warning-row onclick=toggleDescription(4,4)><td>4 - se o quantitativo do 009 está correto -> Se algum aluno ficou com algum atributo diferente</td><td class=Warning>Warning</td></tr><tr id=description-4-4 class=description data-topic=4><td colspan=2>cccccccccccccccccccccccccccccccccccccc</td></tr><tr class=Checked-row onclick=toggleDescription(5,5)><td>5 - se algum nome de aluno está com caractere invalido</td><td class=Checked>Checked</td></tr><tr id=description-5-5 class=description data-topic=5><td colspan=2>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</td></tr><tr class=Checked-row onclick=toggleDescription(6,6)><td>6 - se algum nome de mãe está com caracter invalido</td><td class=Checked>Checked</td></tr><tr id=description-6-6 class=description data-topic=6><td colspan=2>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr><tr class=Warning-row onclick=toggleDescription(7,7)><td>7 - entidade_aluno apontando para mais de uma turma</td><td class=Warning>Warning</td></tr><tr id=description-7-7 class=description data-topic=7><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma turma</td></tr><tr class=Checked-row onclick=toggleDescription(8,8)><td>8 - entidade_aluno apontando para mais de uma etapa</td><td class=Checked>Checked</td></tr><tr id=description-8-8 class=description data-topic=8><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma etapa</td></tr><tr class=Checked-row onclick=toggleDescription(9,9)><td>9 - alunos com nomes similares na mesma turma</td><td class=Checked>Checked</td></tr><tr id=description-9-9 class=description data-topic=9><td colspan=2>Alunos com nomes similares estão na mesma turma, deve-se identificar se tratam-se da mesma pessoa</td></tr><tr class=Checked-row onclick=toggleDescription(10,10)><td>10 - NM_ALUNO apontando para mais de um CD_ENTIDADE</td><td class=Checked>Checked</td></tr><tr id=description-10-10 class=description data-topic=10><td colspan=2>Alunos com nomes iguais na mesma turma/etapa, mas com cd_entidade diferente</td></tr><tr class=Checked-row onclick=toggleDescription(11,11)><td>11 - municipio apontando para mais de uma regional</td><td class=Checked>Checked</td></tr><tr id=description-11-11 class=description data-topic=11><td colspan=2>municipio apontando para mais de uma regional. Avaliar se é necessário criar cd_municipio diferente para não duplicar a entidade no 015</td></tr><tr class=Warning-row onclick=toggleDescription(12,12)><td>12 - entidade_aluno apontando para mais de um nome</td><td class=Warning>Warning</td></tr><tr id=description-12-12 class=description data-topic=12><td colspan=2>entidade_aluno apontando para mais de um nome de aluno. Deve-se atualizar dado para evitar duplicação.</td></tr><tr><th>2 - Exportação e Cadastro de Itens</th><th>Status</th></tr><tr class=Missing-row onclick=toggleDescription(13,0)><td> Critica não realizada</td><td class=Missing>Missing</td></tr><tr id=description-13-0 class=description data-topic=13><td colspan=2>None</td></tr><tr><th>3 - Identificação de sujeitos e certificação de previstos</th><th>Status</th></tr><tr class=Checked-row onclick=toggleDescription(14,1)><td>1 - cd_aluno correto</td><td class=Checked>Checked</td></tr><tr id=description-14-1 class=description data-topic=14><td colspan=2>Verifica se a montagem do cd_aluno foi correta</td></tr><tr class=Checked-row onclick=toggleDescription(15,2)><td>2 - Entidade apontando para mais de um código</td><td class=Checked>Checked</td></tr><tr id=description-15-2 class=description data-topic=15><td colspan=2>Verifica se uma entidade administrativa está apontando para mais de um cd_aluno</td></tr><tr class=Checked-row onclick=toggleDescription(16,3)><td>3 - cd_aluno apontando para mais de uma mãe</td><td class=Checked>Checked</td></tr><tr id=description-16-3 class=description data-topic=16><td colspan=2>Verifica se alguma cd_aluno está com mais de um nome de mãe</td></tr><tr class=Checked-row onclick=toggleDescription(17,4)><td>4 - se o quantitativo do 009 está correto -> Se algum aluno ficou com algum atributo diferente</td><td class=Checked>Checked</td></tr><tr id=description-17-4 class=description data-topic=17><td colspan=2>cccccccccccccccccccccccccccccccccccccc</td></tr><tr class=Checked-row onclick=toggleDescription(18,5)><td>5 - se algum nome de aluno está com caractere invalido</td><td class=Checked>Checked</td></tr><tr id=description-18-5 class=description data-topic=18><td colspan=2>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</td></tr><tr class=Checked-row onclick=toggleDescription(19,6)><td>6 - se algum nome de mãe está com caracter invalido</td><td class=Checked>Checked</td></tr><tr id=description-19-6 class=description data-topic=19><td colspan=2>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr><tr class=Checked-row onclick=toggleDescription(20,7)><td>7 - entidade_aluno apontando para mais de uma turma</td><td class=Checked>Checked</td></tr><tr id=description-20-7 class=description data-topic=20><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma turma</td></tr><tr class=Checked-row onclick=toggleDescription(21,8)><td>8 - entidade_aluno apontando para mais de uma etapa</td><td class=Checked>Checked</td></tr><tr id=description-21-8 class=description data-topic=21><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma etapa</td></tr><tr class=Checked-row onclick=toggleDescription(22,9)><td>9 - alunos com nomes similares na mesma turma</td><td class=Checked>Checked</td></tr><tr id=description-22-9 class=description data-topic=22><td colspan=2>Alunos com nomes similares estão na mesma turma, deve-se identificar se tratam-se da mesma pessoa</td></tr><tr class=Checked-row onclick=toggleDescription(23,10)><td>10 - NM_ALUNO apontando para mais de um CD_ENTIDADE</td><td class=Checked>Checked</td></tr><tr id=description-23-10 class=description data-topic=23><td colspan=2>Alunos com nomes iguais na mesma turma/etapa, mas com cd_entidade diferente</td></tr><tr class=Checked-row onclick=toggleDescription(24,11)><td>11 - municipio apontando para mais de uma regional</td><td class=Checked>Checked</td></tr><tr id=description-24-11 class=description data-topic=24><td colspan=2>municipio apontando para mais de uma regional. Avaliar se é necessário criar cd_municipio diferente para não duplicar a entidade no 015</td></tr><tr class=Checked-row onclick=toggleDescription(25,12)><td>12 - entidade_aluno apontando para mais de um nome</td><td class=Checked>Checked</td></tr><tr id=description-25-12 class=description data-topic=25><td colspan=2>entidade_aluno apontando para mais de um nome de aluno. Deve-se atualizar dado para evitar duplicação.</td></tr><tr><th>4 - Publicação de Resultados no Portal</th><th>Status</th></tr><tr class=Missing-row onclick=toggleDescription(26,0)><td> Critica não realizada</td><td class=Missing>Missing</td></tr><tr id=description-26-0 class=description data-topic=26><td colspan=2>None</td></tr><tr><th>5 - Identificação de sujeitos e certificação de previstos</th><th>Status</th></tr><tr class=Checked-row onclick=toggleDescription(27,1)><td>1 - cd_aluno correto</td><td class=Checked>Checked</td></tr><tr id=description-27-1 class=description data-topic=27><td colspan=2>Verifica se a montagem do cd_aluno foi correta</td></tr><tr class=Checked-row onclick=toggleDescription(28,2)><td>2 - Entidade apontando para mais de um código</td><td class=Checked>Checked</td></tr><tr id=description-28-2 class=description data-topic=28><td colspan=2>Verifica se uma entidade administrativa está apontando para mais de um cd_aluno</td></tr><tr class=Checked-row onclick=toggleDescription(29,3)><td>3 - cd_aluno apontando para mais de uma mãe</td><td class=Checked>Checked</td></tr><tr id=description-29-3 class=description data-topic=29><td colspan=2>Verifica se alguma cd_aluno está com mais de um nome de mãe</td></tr><tr class=Warning-row onclick=toggleDescription(30,4)><td>4 - se o quantitativo do 009 está correto -> Se algum aluno ficou com algum atributo diferente</td><td class=Warning>Warning</td></tr><tr id=description-30-4 class=description data-topic=30><td colspan=2>cccccccccccccccccccccccccccccccccccccc</td></tr><tr class=Checked-row onclick=toggleDescription(31,5)><td>5 - se algum nome de aluno está com caractere invalido</td><td class=Checked>Checked</td></tr><tr id=description-31-5 class=description data-topic=31><td colspan=2>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</td></tr><tr class=Checked-row onclick=toggleDescription(32,6)><td>6 - se algum nome de mãe está com caracter invalido</td><td class=Checked>Checked</td></tr><tr id=description-32-6 class=description data-topic=32><td colspan=2>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr><tr class=Warning-row onclick=toggleDescription(33,7)><td>7 - entidade_aluno apontando para mais de uma turma</td><td class=Warning>Warning</td></tr><tr id=description-33-7 class=description data-topic=33><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma turma</td></tr><tr class=Checked-row onclick=toggleDescription(34,8)><td>8 - entidade_aluno apontando para mais de uma etapa</td><td class=Checked>Checked</td></tr><tr id=description-34-8 class=description data-topic=34><td colspan=2>atributo CD_ENTIDADE_ADMINISTRATIVA_ALUNO está duplicado em mais de uma etapa</td></tr><tr class=Checked-row onclick=toggleDescription(35,9)><td>9 - alunos com nomes similares na mesma turma</td><td class=Checked>Checked</td></tr><tr id=description-35-9 class=description data-topic=35><td colspan=2>Alunos com nomes similares estão na mesma turma, deve-se identificar se tratam-se da mesma pessoa</td></tr><tr class=Checked-row onclick=toggleDescription(36,10)><td>10 - NM_ALUNO apontando para mais de um CD_ENTIDADE</td><td class=Checked>Checked</td></tr><tr id=description-36-10 class=description data-topic=36><td colspan=2>Alunos com nomes iguais na mesma turma/etapa, mas com cd_entidade diferente</td></tr><tr class=Checked-row onclick=toggleDescription(37,11)><td>11 - municipio apontando para mais de uma regional</td><td class=Checked>Checked</td></tr><tr id=description-37-11 class=description data-topic=37><td colspan=2>municipio apontando para mais de uma regional. Avaliar se é necessário criar cd_municipio diferente para não duplicar a entidade no 015</td></tr><tr class=Warning-row onclick=toggleDescription(38,12)><td>12 - entidade_aluno apontando para mais de um nome</td><td class=Warning>Warning</td></tr><tr id=description-38-12 class=description data-topic=38><td colspan=2>entidade_aluno apontando para mais de um nome de aluno. Deve-se atualizar dado para evitar duplicação.</td></tr><tr><th>6 - Microdados e Planilhas de Resultados</th><th>Status</th></tr><tr class=Missing-row onclick=toggleDescription(39,0)><td> Critica não realizada</td><td class=Missing>Missing</td></tr><tr id=description-39-0 class=description data-topic=39><td colspan=2>None</td></tr><tr><th>7 - Produçãdo de Índices e Prêmio</th><th>Status</th></tr><tr class=Missing-row onclick=toggleDescription(40,0)><td> Critica não realizada</td><td class=Missing>Missing</td></tr><tr id=description-40-0 class=description data-topic=40><td colspan=2>None</td></tr></table></div> </body></html>
